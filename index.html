@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lyrics-App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="./scripts.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR SECTION -->
+  <section class="la-navbar-section">
+    <div class="la-navbar-main-div">
+      <img class="la-logo-img" alt="" src="./assets/la-icon.png" />
+    </div>
+  </section>
+
+  <!-- MAIN SECTION FOR SONGS AND LYRICS -->
+  <section class="la-song-section">
+    <div class="la-song-main-div">
+      <div class="la-song-sidebar col-1">
+        <p>Queue</p>
+        <div class="la-vertical-line"></div>
+      </div>
+      <div class="la-song-middle col-9 la-song-middle-mob">
+        <form name="myForm" onsubmit="return validateForm();" method="post" id="myForm">
+          <div class="la-search-div">
+            <!-- Name: <input type="text" name="fname">
+            <input type="submit" value="Submit"> -->
+            <div>
+              <input class="la-song-artist-input" name="artist" type="text" placeholder="Enter your artist" /><span
+                class="la-mandatory">*</span>
+            </div>
+            <div>
+              <input class="la-song-artist-input la-song-name-input" name="song" type="text"
+                placeholder="Enter the song" /><span class="la-mandatory">*</span>
+            </div>
+            <button class="la-song-search-btn" type="submit">
+              <i class="fa fa-search"></i>
+              <span>Search</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="la-top-searched-songs-div">
+          <p class="la-top-pick-text">TOP PICKS</p>
+          <div class="la-top-four-picks-row" id="la-top-picks">
+            <!-- <div class="la-top-pick-div col-3">
+              <img class="la-top-pick-img" alt="" src="./assets/la-icon.png" />
+              <p class="la-top-pick-song-details">Song Name - Band</p>
+              <audio controls>
+                <source src="http://cdn-preview-5.deezer.com/stream/c-57b06480c8fcc32d3ffcb61559fd00bf-3.mp3"
+                  type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="la-top-pick-div col-3">
+              <img class="la-top-pick-img" alt="" src="./assets/la-icon.png" />
+              <p class="la-top-pick-song-details">Song Name - Band</p>
+              <audio controls>
+                <source src="http://cdn-preview-5.deezer.com/stream/c-57b06480c8fcc32d3ffcb61559fd00bf-3.mp3"
+                  type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="la-top-pick-div col-3">
+              <img class="la-top-pick-img" alt="" src="./assets/la-icon.png" />
+              <p class="la-top-pick-song-details">Song Name - Band</p>
+              <audio controls>
+                <source src="http://cdn-preview-5.deezer.com/stream/c-57b06480c8fcc32d3ffcb61559fd00bf-3.mp3"
+                  type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="la-top-pick-div col-3">
+              <img class="la-top-pick-img" alt="" src="./assets/la-icon.png" />
+              <p class="la-top-pick-song-details">Song Name - Band</p>
+              <audio controls>
+                <source src="http://cdn-preview-5.deezer.com/stream/c-57b06480c8fcc32d3ffcb61559fd00bf-3.mp3"
+                  type="audio/mpeg">
+              </audio>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- HTML SCSS JSResult -->
+        <!-- <div class='main'>
+          <div class='slider-container'>
+            <div class='slider'>
+              <ul>
+                <li class="la-slider-li">
+                  1
+                </li>
+                <li class="la-slider-li">
+                  2
+                </li>
+                <li class="la-slider-li">
+                  3
+                </li>
+                <li class="la-slider-li">
+                  4
+                </li>
+                <li class="la-slider-li">
+                  5
+                </li>
+                <li class="la-slider-li">
+                  6
+                </li>
+              </ul>
+              <div class='slider-nav'>
+                <div class='prev'></div>
+                <div class='next'></div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <table>
+          <thead>
+            <tr>
+              <th>Band Name</th>
+              <th>Song Name</th>
+              <th>Action</th>
+              <!-- <th>Twitter</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-column="First Name">James</td>
+              <td data-column="Last Name">Matman</td>
+              <td data-column="Job Title"><a href="#">View Lyrics</a></td>
+              <!-- <td data-column="Twitter">@james</td> -->
+            </tr>
+            <tr>
+              <td data-column="First Name">Andor</td>
+              <td data-column="Last Name">Nagy</td>
+              <td data-column="Job Title"><a href="#">View Lyrics</a></td>
+              <!-- <td data-column="Twitter">@andornagy</td> -->
+            </tr>
+            <tr>
+              <td data-column="First Name">Tamas</td>
+              <td data-column="Last Name">Biro</td>
+              <td data-column="Job Title"><a href="#">View Lyrics</a></td>
+              <!-- <td data-column="Twitter">@tamas</td> -->
+            </tr>
+            <tr>
+              <td data-column="First Name">Zoli</td>
+              <td data-column="Last Name">Mastah</td>
+              <td data-column="Job Title"><a href="#">View Lyrics</a></td>
+              <!-- <td data-column="Twitter">@zoli</td> -->
+            </tr>
+            <tr>
+              <td data-column="First Name">Szabi</td>
+              <td data-column="Last Name">Nagy</td>
+              <td data-column="Job Title"><a href="#">View Lyrics</a></td>
+              <!-- <td data-column="Twitter">@szabi</td> -->
+            </tr>
+          </tbody>
+        </table>
+
+        <div id="la-songs-list"></div>
+      </div>
+      <div class="la-ad-part-div col-2">
+        <div class="la-download-app">
+          <p>Download &nbsp;</p> (when we launch)
+        </div>
+      </div>
+    </div>
+    <a class="button" href="#openModal">Open it up!</a>
+    <div id="openModal" class="modalbg">
+      <div class="dialog">
+        <a href="#close" title="Close" class="close">X</a>
+        <div class="la-modal-view">
+
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+<script>
+  var form = document.getElementById("myForm");
+  function handleForm(event) { event.preventDefault(); }
+  form.addEventListener('submit', handleForm);
+</script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+<!-- <script>
+  jQuery(document).ready(function ($) {
+    console.log('check me --')
+    var gadgetCarousel = $(".carousel");
+    gadgetCarousel.each(function () {
+      if ($(this).is(".type-one-carousel")) {
+        $(this).slick({
+          dots: true,
+          infinite: true,
+          slidesToShow: 2
+        });
+      } else if ($(this).is(".type-two-carousel")) {
+        $(this).slick({
+          dots: true,
+          infinite: true,
+          slidesToShow: 1
+        });
+      } else {
+        $(this).slick();
+      }
+    });
+  });
+
+</script> -->
+
+<!-- <script type="text/javascript">
+  function resetPos() {
+    $('.slider ul li').removeClass('transition');
+    $('.slider ul li').removeClass('left right');
+  }
+
+  // function resetPos() {
+  //   console.log('ivide thanne')
+  //   document.getElementsByClassName('la-slider-li').removeClass('transition')
+  //   document.getElementsByClassName('la-slider-li').removeClass('left right')
+  // }
+
+  //clicks
+  $('.prev').on('click', function () {
+    $('.slider ul li').addClass('transition right');
+
+    setTimeout(function () {
+      prev();
+      resetPos();
+    }, 500);
+  });
+
+  $('.next').on('click', function () {
+    $('.slider ul li').addClass('transition left');
+
+    setTimeout(function () {
+      next();
+      resetPos();
+    }, 500);
+  });
+
+
+
+  ///////////////////////////////////////////////////////////////
+  function init() {
+    $('.slider ul li').each(function () {
+      var curPos = $(this).index();
+      $(this).css('order', curPos + 1);
+    });
+  }
+
+  function prev() {
+    var slider = $('.slider');
+    var sliderLength = slider.find('ul li').length;
+    $('.slider ul li').each(function () {
+      var curPos = parseInt($(this).css('order'));
+      var sliderLength = slider.find('ul li').length;
+      if (curPos < sliderLength) { $(this).css('order', curPos + 1); } else { curPos = 1; $(this).css('order', curPos); }
+    });
+  }
+  function next() {
+    var slider = $('.slider'); var sliderLength = slider.find('ul li').length; $('.slider ul li').each(function () {
+      var curPos = parseInt($(this).css('order')); var sliderLength = slider.find('ul li').length;
+      if (curPos > 0) {
+        $(this).css('order', curPos - 1);
+      }
+      else {
+        curPos = sliderLength - 1;
+        $(this).css('order', curPos);
+      }
+    });
+  }
+
+  $(document).ready(function () {
+    init();
+  });
+</script> -->
+
+
+</html>
