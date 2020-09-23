@@ -1,4 +1,9 @@
 /* GRID SYSTEM LAYOUT */
+input:focus,
+button:focus {
+  outline: none;
+}
+
 .col-1 {
   width: 8.33%;
 }
@@ -62,6 +67,22 @@ body {
   margin: 0;
 }
 
+/* LOADER */
+.la-main-loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000f2;
+  visibility: hidden;
+}
+
+.show-loader {
+  visibility: visible;
+}
+
 /* navbar style */
 
 .la-navbar-section,
@@ -78,11 +99,21 @@ body {
   align-items: center;
 }
 
+.la-navbar-main-div span {
+  font-style: italic;
+  font-size: 23px;
+  margin-left: -14px;
+  color: #f6f5f0;
+}
+
 .la-logo-img {
   width: 50px;
   margin-left: 20px;
 }
 
+.la-loader-img {
+  width: auto;
+}
 
 /* SONG SECTION */
 
@@ -99,7 +130,7 @@ body {
   box-sizing: border-box;
   font-size: 14px;
   border-radius: 25px 25px 25px 25px;
-  width: 97%;
+  width: 900px;
   border: none;
 }
 
@@ -137,6 +168,15 @@ body {
   cursor: pointer;
 }
 
+.la-menu-side-text {
+  font-size: 30px;
+  color: black;
+  letter-spacing: 2px;
+  margin-left: -15px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
 .la-song-search-btn>span {
   padding-left: 5px
 }
@@ -162,9 +202,14 @@ body {
 .la-download-app>p {
   color: #e72c30;
   font-weight: 600;
+  cursor: pointer;
 }
 
 /* TOP SEARCHED */
+
+.la-songs-container {
+  background-color: #efefef;
+}
 
 .la-top-searched-songs-div {
   background-color: #efefef;
@@ -185,6 +230,14 @@ body {
 .la-top-four-picks-row {
   display: flex;
   padding-top: 15px;
+}
+
+.la-top-pick-vertical-line {
+  margin: 15px
+}
+
+.la-other-picks {
+  margin-left: 30px;
 }
 
 .la-top-pick-div {
@@ -361,7 +414,23 @@ li:nth-child(6) {
 table {
   width: 1100px;
   border-collapse: collapse;
-  margin: 50px auto;
+  margin: 30px auto;
+}
+
+.la-songs-table-head {
+  visibility: hidden;
+}
+
+.la-songs-table-head-show {
+  visibility: visible;
+}
+
+.la-view-lyrics-text {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: 550;
 }
 
 /* Zebra striping */
@@ -380,6 +449,26 @@ th {
   padding: 10px;
   text-align: left;
   font-size: 18px;
+}
+
+/* ADVERTISEMENT SECTION */
+
+.la-advertisement-section {
+  height: 300px;
+  width: auto;
+  background: #428679;
+  /* margin: 8px; */
+  margin-left: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.la-advertisement-section p {
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
 }
 
 /* Modal css */
@@ -557,7 +646,14 @@ a {
 .la-modal-song-lyrics {
   overflow: auto;
   height: 500px;
-  font-size: 18px
+  font-size: 20px;
+  text-align: justify;
+}
+
+.la-lyrics-not-listed {
+  text-align: center;
+  color: red;
+  padding-top: 20px;
 }
 
 /* 
@@ -632,6 +728,14 @@ and also iPads specifically.
     display: block;
   }
 
+  .la-songs-container {
+    height: 210px;
+  }
+
+  .la-other-picks {
+    margin-left: 15px;
+  }
+
   .la-search-div>div {
     padding-top: 10px;
     padding-left: 0px;
@@ -664,5 +768,13 @@ and also iPads specifically.
   .la-top-searched-songs-div {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .modalbg .dialog {
+    width: 320px;
+  }
+
+  .la-song-artist-input {
+    width: 97%;
   }
 }

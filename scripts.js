@@ -1,28 +1,20 @@
-// fetch('https://jsonplaceholder.typicode.com/posts').then(function (response) {
-//   // The API call was successful!
-//   console.log('success!', response);
-// }).catch(function (err) {
-//   // There was an error
-//   console.warn('Something went wrong.', err);
-// });
-
-function getLyrics(e, a) {
-  console.log('e here -- ',this.getAttribute('song'), this.getAttribute('artist'))
+function getLyrics() {
   window.location.hash = 'openModal'
-  fetch('https://api.lyrics.ovh/v1/'+this.getAttribute('artist')+'/'+this.getAttribute('song'))
+  fetch('https://api.lyrics.ovh/v1/' + this.getAttribute('artist') + '/' + this.getAttribute('song'))
     .then(response => response.json())
     .then(data => {
       let songModal = document.getElementsByClassName("la-modal-view")[0]
       removeAllChildNodes(songModal)
-      console.log('data -- ', data.lyrics)
       let headingLyric = document.createElement("h2")
       headingLyric.classList.add("la-modal-lyrics-heading")
-      headingLyric.innerHTML = "Lyrics of "+ this.getAttribute('song')
+      headingLyric.innerHTML = this.getAttribute('song') + " - " + this.getAttribute('artist') + " Lyrics" 
       songModal.appendChild(headingLyric)
       let songLyric = document.createElement("p")
       songLyric.classList.add("la-modal-song-lyrics")
-      if(data.lyrics === "")
+      if (data.lyrics === "") {
         songLyric.innerHTML = "Lyrics not listed"
+        songLyric.classList.add('la-lyrics-not-listed')
+      }
       else
         songLyric.innerHTML = data.lyrics
       songModal.appendChild(songLyric)
@@ -39,29 +31,47 @@ function removeAllChildNodes(parent) {
 
 function validateForm() {
   // e.preventDefault();
-  let artistName = document.forms["myForm"]["artist"].value;
-  let songName = document.forms["myForm"]["song"].value
-  if (artistName === "" || songName === "") {
-    alert("Please fill all the fields");
+  let tableBody = document.getElementById("la-songs-table-list")
+  let topPicksDiv = document.getElementById("la-top-picks")
+
+  removeAllChildNodes(topPicksDiv)
+  removeAllChildNodes(tableBody)
+
+  let artistName = document.forms["myForm"]["artist"].value
+  if (artistName === "" || artistName.length < 4) {
+    alert("Please search for artist name or song!");
     return false;
   }
   else {
-    fetch('https://api.lyrics.ovh/suggest/catalyst')
+    let tableHead = document.getElementById("la-songs-table-head")
+    tableHead.classList.add('la-songs-table-head-show')
+    let loaderDiv = document.getElementById("la-loader")
+    loaderDiv.classList.add("show-loader")
+    fetch('https://api.lyrics.ovh/suggest/' + artistName)
       .then(response => response.json())
       .then(data => {
-        console.log('data -- ', data.data)
-        localStorage.setItem('testObject', JSON.stringify(data.data));
-        let songListDiv = document.getElementById("la-songs-list")
-        // songListDiv = null
-        removeAllChildNodes(songListDiv)
-        for (let i = 0; i < data.data.length; i++) {
+        localStorage.setItem('songData', JSON.stringify(data.data));
+        for (let i = 4; i < data.data.length; i++) {
           let tableRowSong = document.createElement("tr");
-          tableRowSong.innerHTML = 'Name: ' + data.data[i].title_short + ' ' + data.data[i].artist.name;
-          songListDiv.append(tableRowSong)
+          let tableColumn1 = document.createElement("td")
+          tableColumn1.setAttribute('data-column', "First Name")
+          tableColumn1.innerHTML = data.data[i].artist.name
+          tableRowSong.appendChild(tableColumn1)
+          let tableColumn2 = document.createElement("td")
+          tableColumn2.setAttribute('data-column', "Last Name")
+          tableColumn2.innerHTML = data.data[i].title_short
+          tableRowSong.appendChild(tableColumn2)
+          let tableColumn3 = document.createElement("td")
+          tableColumn3.setAttribute('data-column', "Job Title")
+          tableColumn3.classList.add('la-view-lyrics-text')
+          tableColumn3.innerHTML = "View"
+          tableColumn3.setAttribute('song', data.data[i].title_short)
+          tableColumn3.setAttribute('artist', data.data[i].artist.name)
+          tableColumn3.addEventListener("click", getLyrics, false);
+          tableRowSong.appendChild(tableColumn3)
+          tableBody.appendChild(tableRowSong)
         }
-        console.log('list --- ', songListDiv)
 
-        let topPicksDiv = document.getElementById("la-top-picks")
         for (let i = 0; i < 4; i++) {
           let topPick = document.createElement("div")
           topPick.classList.add("la-top-pick-div")
@@ -79,7 +89,6 @@ function validateForm() {
 
           let topPickAudio = document.createElement("audio")
           // topPickAudio.classList.add("")
-          console.log('check -- ', topPickAudio)
           // topPickAudio.src = data.data[i].preview
           // var audio = document.getElementsByTagName('audio');
           // audio[0].load();
@@ -100,31 +109,13 @@ function validateForm() {
           // topPick.appendChild(topPickAudio)
           topPick.appendChild(topPickLyrics)
           topPicksDiv.appendChild(topPick)
+          loaderDiv.classList.remove("show-loader")
 
         }
-        console.log('list --- ', topPicksDiv)
 
       }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
       });
-
-    // fetch('https://api.lyrics.ovh/suggest/stairway').then(function (response) {
-    //   // The API call was successful!
-    //   console.log('success!', response.json());
-    //   localStorage.setItem('testObject', JSON.stringify(response.data));
-    //   let songListDiv = document.getElementById("la-songs-list")
-
-    //   for(let i = 0; i< response.data.length; i++) {
-    //     let tableRowSong = document.createElement("tr");
-    //     tableRowSong.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
-    //     songListDiv.append(tableRowSong)
-    //   }
-
-    //   console.log('list --- ', songListDiv)
-    // }).catch(function (err) {
-    //   // There was an error
-    //   console.warn('Something went wrong.', err);
-    // });
   }
 }
